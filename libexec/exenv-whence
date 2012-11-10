@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -e
+[ -n "$EXENV_DEBUG" ] && set -x
+
+# Provide exenv completions
+if [ "$1" = "--complete" ]; then
+  echo --path
+  exec exenv shims --short
+fi
+
+if [ "$1" = "--path" ]; then
+  print_paths="1"
+  shift
+else
+  print_paths=""
+fi
+
+whence() {
+  local command="$1"
+  exenv-versions --bare | while read version; do
+    path="$(exenv-prefix "$version")/bin/${command}"
+    if [ -x "$path" ]; then
+      [ "$print_paths" ] && echo "$path" || echo "$version"
+    fi
+  done
+}
+
+EXENV_COMMAND="$1"
+if [ -z "$EXENV_COMMAND" ]; then
+  echo "usage: exenv whence [--path] COMMAND" >&2
+  exit 1
+fi
+
+result="$(whence "$EXENV_COMMAND")"
+[ -n "$result" ] && echo "$result"

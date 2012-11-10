@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -e
+[ -n "$EXENV_DEBUG" ] && set -x
+
+echo "$(exenv-version-name) (set by $(exenv-version-origin))"

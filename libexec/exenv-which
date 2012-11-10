@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+set -e
+[ -n "$EXENV_DEBUG" ] && set -x
+
+# Provide exenv completions
+if [ "$1" = "--complete" ]; then
+  exec exenv shims --short
+fi
+
+expand_path() {
+  if [ ! -d "$1" ]; then
+    return 1
+  fi
+
+  local cwd="$(pwd)"
+  cd "$1"
+  pwd
+  cd "$cwd"
+}
+
+remove_from_path() {
+  local path_to_remove="$(expand_path "$1")"
+  local result=""
+
+  if [ -z "$path_to_remove" ]; then
+    echo "${PATH}"
+    return
+  fi
+
+  local paths
+  IFS=: paths=($PATH)
+
+  for path in "${paths[@]}"; do
+    path="$(expand_path "$path" || true)"
+    if [ -n "$path" ] && [ "$path" != "$path_to_remove" ]; then
+      result="${result}${path}:"
+    fi
+  done
+
+  echo "${result%:}"
+}
+
+EXENV_VERSION="$(exenv-version-name)"
+EXENV_COMMAND="$1"
+
+if [ -z "$EXENV_COMMAND" ]; then
+  echo "usage: exenv which COMMAND" >&2
+  exit 1
+fi
+
+if [ "$EXENV_VERSION" = "system" ]; then
+  PATH="$(remove_from_path "${EXENV_ROOT}/shims")"
+  EXENV_COMMAND_PATH="$(command -v "$EXENV_COMMAND")"
+else
+  EXENV_COMMAND_PATH="${EXENV_ROOT}/versions/${EXENV_VERSION}/bin/${EXENV_COMMAND}"
+fi
+
+for script in $(exenv-hooks which); do
+  source "$script"
+done
+
+if [ -x "$EXENV_COMMAND_PATH" ]; then
+  echo "$EXENV_COMMAND_PATH"
+else
+  echo "exenv: $EXENV_COMMAND: command not found" >&2
+
+  versions="$(exenv-whence "$EXENV_COMMAND" || true)"
+  if [ -n "$versions" ]; then
+    { echo
+      echo "The \`$1' command exists in these Ruby versions:"
+      echo "$versions" | sed 's/^/  /g'
+      echo
+    } >&2
+  fi
+
+  exit 127
+fi

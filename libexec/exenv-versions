@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -e
+[ -n "$EXENV_DEBUG" ] && set -x
+
+EXENV_VERSION_NAME="$(exenv-version-name)"
+
+if [ "$1" = "--bare" ]; then
+  hit_prefix=""
+  miss_prefix=""
+  print_version="$EXENV_VERSION_NAME"
+else
+  hit_prefix="* "
+  miss_prefix="  "
+  print_version="$(exenv-version)"
+fi
+
+for path in "${EXENV_ROOT}/versions/"*; do
+  if [ -d "$path" ]; then
+    version="${path##*/}"
+
+    if [ "$version" == "$EXENV_VERSION_NAME" ]; then
+      echo "${hit_prefix}${print_version}"
+    else
+      echo "${miss_prefix}${version}"
+    fi
+  fi
+done

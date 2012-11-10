@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -e
+[ -n "$EXENV_DEBUG" ] && set -x
+
+# Provide exenv completions
+if [ "$1" = "--complete" ]; then
+  echo --unset
+  echo system
+  exec exenv-versions --bare
+fi
+
+version="$1"
+
+if [ -z "$version" ]; then
+  if [ -z "$EXENV_VERSION" ]; then
+    echo "exenv: no shell-specific version configured" >&2
+    exit 1
+  else
+    echo "echo \"\$EXENV_VERSION\""
+    exit
+  fi
+fi
+
+if [ "$version" = "--unset" ]; then
+  echo "unset EXENV_VERSION"
+  exit 1
+fi
+
+# Make sure the specified version is installed.
+exenv-prefix "$version" >/dev/null
+
+echo "export EXENV_VERSION=\"${version}\""

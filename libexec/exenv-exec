@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -e
+[ -n "$EXENV_DEBUG" ] && set -x
+
+# Provide exenv completions
+if [ "$1" = "--complete" ]; then
+  exec exenv shims --short
+fi
+
+EXENV_COMMAND="$1"
+if [ -z "$EXENV_COMMAND" ]; then
+  echo "usage: exenv exec COMMAND [arg1 arg2...]" >&2
+  exit 1
+fi
+
+EXENV_COMMAND_PATH="$(exenv-which "$EXENV_COMMAND")"
+EXENV_BIN_PATH="${EXENV_COMMAND_PATH%/*}"
+
+for script in $(exenv-hooks exec); do
+  source "$script"
+done
+
+shift 1
+export PATH="${EXENV_BIN_PATH}:${PATH}"
+exec -a "$EXENV_COMMAND" "$EXENV_COMMAND_PATH" "$@"

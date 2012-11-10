@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -e
+[ -n "$EXENV_DEBUG" ] && set -x
+
+if [ -n "$EXENV_VERSION" ]; then
+  echo "EXENV_VERSION environment variable"
+else
+  exenv-version-file
+fi

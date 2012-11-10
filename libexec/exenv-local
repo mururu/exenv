@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -e
+[ -n "$EXENV_DEBUG" ] && set -x
+
+# Provide exenv completions
+if [ "$1" = "--complete" ]; then
+  echo --unset
+  echo system
+  exec exenv-versions --bare
+fi
+
+EXENV_VERSION="$1"
+EXENV_VERSION_FILE=".exenv-version"
+
+if [ "$EXENV_VERSION" = "--unset" ]; then
+  rm -f "$EXENV_VERSION_FILE"
+elif [ -n "$EXENV_VERSION" ]; then
+  exenv-version-file-write "$EXENV_VERSION_FILE" "$EXENV_VERSION"
+else
+  exenv-version-file-read "$EXENV_VERSION_FILE" ||
+  { echo "exenv: no local version configured for this directory"
+    exit 1
+  } >&2
+fi

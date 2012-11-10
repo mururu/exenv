@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -e
+[ -n "$EXENV_DEBUG" ] && set -x
+
+if [ -z "$EXENV_VERSION" ]; then
+  EXENV_VERSION_FILE="$(exenv-version-file)"
+  EXENV_VERSION="$(exenv-version-file-read "$EXENV_VERSION_FILE" || true)"
+fi
+
+if [ -z "$EXENV_VERSION" ] || [ "$EXENV_VERSION" = "system" ]; then
+  echo "system"
+  exit
+fi
+
+EXENV_VERSION_PATH="${EXENV_ROOT}/versions/${EXENV_VERSION}"
+
+if [ -d "$EXENV_VERSION_PATH" ]; then
+  echo "$EXENV_VERSION"
+else
+  echo "exenv: version \`$EXENV_VERSION' is not installed" >&2
+  exit 1
+fi

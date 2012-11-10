@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+set -e
+[ -n "$EXENV_DEBUG" ] && set -x
+
+resolve_link() {
+  $(type -p greadlink readlink | head -1) "$1"
+}
+
+abs_dirname() {
+  local cwd="$(pwd)"
+  local path="$1"
+
+  while [ -n "$path" ]; do
+    cd "${path%/*}"
+    local name="${path##*/}"
+    path="$(resolve_link "$name" || true)"
+  done
+
+  pwd
+  cd "$cwd"
+}
+
+if [ -z "${EXENV_ROOT}" ]; then
+  EXENV_ROOT="${HOME}/.exenv"
+else
+  EXENV_ROOT="${EXENV_ROOT%/}"
+fi
+export EXENV_ROOT
+
+if [ -z "${EXENV_DIR}" ]; then
+  EXENV_DIR="$(pwd)"
+else
+  cd "$EXENV_DIR" 2>/dev/null || {
+    echo "exenv: cannot change working directory to \`$EXENV_DIR'"
+    exit 1
+  } >&2
+  EXENV_DIR="$(pwd)"
+  cd "$OLDPWD"
+fi
+export EXENV_DIR
+
+
+shopt -s nullglob
+
+bin_path="$(abs_dirname "$0")"
+for plugin_bin in "${EXENV_ROOT}/plugins/"*/bin; do
+  bin_path="${bin_path}:${plugin_bin}"
+done
+export PATH="${bin_path}:${PATH}"
+
+hook_path="${EXENV_HOOK_PATH}:${EXENV_ROOT}/exenv.d:/usr/local/etc/exenv.d:/etc/exenv.d:/usr/lib/exenv/hooks"
+for plugin_hook in "${EXENV_ROOT}/plugins/"*/etc/exenv.d; do
+  hook_path="${hook_path}:${plugin_hook}"
+done
+export EXENV_HOOK_PATH="$hook_path"
+
+shopt -u nullglob
+
+
+command="$1"
+case "$command" in
+"" | "-h" | "--help" )
+  echo -e "exenv 0.3.0\n$(exenv-help)" >&2
+  ;;
+* )
+  command_path="$(command -v "exenv-$command" || true)"
+  if [ -z "$command_path" ]; then
+    echo "exenv: no such command \`$command'" >&2
+    exit 1
+  fi
+
+  shift 1
+  exec "$command_path" "$@"
+  ;;
+esac

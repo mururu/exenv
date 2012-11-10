@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -e
+[ -n "$EXENV_DEBUG" ] && set -x
+
+EXENV_VERSION_FILE="$1"
+EXENV_VERSION="$2"
+
+if [ -z "$EXENV_VERSION" ] || [ -z "$EXENV_VERSION_FILE" ]; then
+  echo "usage: exenv write-version-file FILENAME VERSION" >&2
+  exit 1
+fi
+
+# Make sure the specified version is installed.
+exenv-prefix "$EXENV_VERSION" >/dev/null
+
+# Write the version out to disk.
+echo "$EXENV_VERSION" > "$EXENV_VERSION_FILE"

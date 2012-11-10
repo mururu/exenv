@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -e
+[ -n "$EXENV_DEBUG" ] && set -x
+
+# Provide exenv completions
+if [ "$1" = "--complete" ]; then
+  echo system
+  exec exenv-versions --bare
+fi
+
+if [ -n "$1" ]; then
+  export EXENV_VERSION="$1"
+elif [ -z "$EXENV_VERSION" ]; then
+  EXENV_VERSION="$(exenv-version-name)"
+fi
+
+if [ "$EXENV_VERSION" = "system" ]; then
+  RUBY_PATH="$(exenv-which ruby)"
+  echo "${RUBY_PATH%/*}"
+  exit
+fi
+
+EXENV_PREFIX_PATH="${EXENV_ROOT}/versions/${EXENV_VERSION}"
+if [ ! -d "$EXENV_PREFIX_PATH" ]; then
+  echo "exenv: version \`${EXENV_VERSION}' not installed" >&2
+  exit 1
+fi
+
+echo "$EXENV_PREFIX_PATH"
