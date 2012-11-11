@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 #
-# `ruby-local-exec` is a drop-in replacement for the standard Ruby
+# `elixir-local-exec` is a drop-in replacement for the standard Elixir
 # shebang line:
 #
-#    #!/usr/bin/env ruby-local-exec
+#    #!/usr/bin/env elixir-local-exec
 #
-# Use it for scripts inside a project with an `.rbenv-version`
+# Use it for scripts inside a project with an `.exenv-version`
 # file. When you run the scripts, they'll use the project-specified
-# Ruby version, regardless of what directory they're run from. Useful
+# Elixir version, regardless of what directory they're run from. Useful
 # for e.g. running project tasks in cron scripts without needing to
 # `cd` into the project first.
 
 set -e
-export RBENV_DIR="${1%/*}"
-exec ruby "$@"
+export EXENV_DIR="${1%/*}"
+exec elixir "$@"

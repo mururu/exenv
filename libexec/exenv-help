@@ -3,18 +3,18 @@ set -e
 [ -n "$EXENV_DEBUG" ] && set -x
 
 print_set_version() {
-  echo "<version> should be a string matching a Ruby version known by exenv."
+  echo "<version> should be a string matching a Elixir version known by exenv."
 
   local versions="$(exenv-versions --bare)"
   if [ -z "$versions" ]; then
-    echo "There are currently no Ruby versions installed for exenv."
+    echo "There are currently no Elixir versions installed for exenv."
   else
-    echo "The currently installed Ruby versions are:"
+    echo "The currently installed Elixir versions are:"
     echo "$versions" | sed 's/^/  /'
   fi
 
   echo
-  echo "The special version string 'system' will use your default system Ruby."
+  echo "The special version string 'system' will use your default system Elixir."
 }
 
 case "$1" in
@@ -23,13 +23,12 @@ case "$1" in
 Some useful exenv commands are:
    commands      List all exenv commands
    rehash        Rehash exenv shims (run this after installing binaries)
-   global        Set or show the global Ruby version
-   local         Set or show the local directory-specific Ruby version
-   shell         Set or show the shell-specific Ruby version
-   version       Show the current Ruby version
-   versions      List all Ruby versions known by exenv
-   which         Show the full path for the given Ruby command
-   whence        List all Ruby versions with the given command
+   global        Set or show the global Elixir version
+   local         Set or show the local directory-specific Elixir version
+   shell         Set or show the shell-specific Elixir version
+   version       Show the current Elixir version
+   versions      List all Elixir versions known by exenv
+   which         Show the full path for the given Elixir command
 
 See 'exenv help <command>' for information on a specific command.
 For full documentation, see: https://github.com/sstephenson/exenv#readme"
@@ -42,7 +41,7 @@ List all exenv commands."
 ;;
 global) echo "usage: exenv global <version>
 
-Sets the global Ruby version. You can override the global version at
+Sets the global Elixir version. You can override the global version at
 any time by setting a directory-specific version with \`exenv local'
 or by setting the EXENV_VERSION environment variable.
 
@@ -51,12 +50,12 @@ $(print_set_version)"
 local) echo "usage: exenv local <version>
        exenv local --unset
 
-Sets the local directory-specific Ruby version by writing the version
+Sets the local directory-specific Elixir version by writing the version
 name to a file named '.exenv-version'.
 
-When you run a Ruby command, exenv will look for an '.exenv-version'
+When you run a Elixir command, exenv will look for an '.exenv-version'
 file in the current directory and each parent directory. If no such
-file is found in the tree, exenv will use the global Ruby version
+file is found in the tree, exenv will use the global Elixir version
 specified with \`exenv global', or the version specified in the
 EXENV_VERSION environment variable.
 
@@ -65,7 +64,7 @@ $(print_set_version)"
 shell) echo "usage: exenv shell <version>
        exenv shell --unset
 
-Sets a shell-specific Ruby version by setting the 'EXENV_VERSION'
+Sets a shell-specific Elixir version by setting the 'EXENV_VERSION'
 environment variable in your shell. This version overrides both
 project-specific versions and the global version.
 
@@ -74,7 +73,7 @@ $(print_set_version)"
 versions) echo "usage: exenv versions
        exenv versions --bare
 
-Lists all Ruby versions known by exenv."
+Lists all Elixir versions known by exenv."
 ;;
 which) echo "usage: exenv which <command>
 
@@ -83,7 +82,7 @@ run the given command."
 ;;
 whence) echo "usage: exenv whence <command>
 
-Lists all Ruby versions with the given command installed."
+Lists all Elixir versions with the given command installed."
 ;;
 *)
   command_path="$(command -v "exenv-$1" || true)"

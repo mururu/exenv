@@ -15,8 +15,8 @@ elif [ -z "$EXENV_VERSION" ]; then
 fi
 
 if [ "$EXENV_VERSION" = "system" ]; then
-  RUBY_PATH="$(exenv-which ruby)"
-  echo "${RUBY_PATH%/*}"
+  ELIXIR_PATH="$(exenv-which elixir)"
+  echo "${ELIXIR_PATH%/*}"
   exit
 fi
 
