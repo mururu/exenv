@@ -60,7 +60,7 @@ shopt -u nullglob
 command="$1"
 case "$command" in
 "" | "-h" | "--help" )
-  echo -e "exenv 0.3.0\n$(exenv-help)" >&2
+  echo -e "exenv 0.1.0\n$(exenv-help)" >&2
   ;;
 * )
   command_path="$(command -v "exenv-$command" || true)"
