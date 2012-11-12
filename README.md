@@ -160,7 +160,7 @@ first argument. The most common subcommands are:
 Sets the global version of Elixir to be used in all shells by writing
 the version name to the `~/.exenv/version` file. This version can be
 overridden by a per-project `.exenv-version` file, or by setting the
-`exenv_VERSION` environment variable.
+`EXENV_VERSION` environment variable.
 
     $ exenv global 0.7.0
 
@@ -175,7 +175,7 @@ currently configured global version.
 Sets a local per-project Elixir version by writing the version name to
 an `.exenv-version` file in the current directory. This version
 overrides the global, and can be overridden itself by setting the
-`exenv_VERSION` environment variable or with the `exenv shell`
+`EXENV_VERSION` environment variable or with the `exenv shell`
 command.
 
     $ exenv local 0.6.0
@@ -187,23 +187,23 @@ configured local version. You can also unset the local version:
 
 ### <a name="section_3.3"></a> 3.3 exenv shell
 
-Sets a shell-specific Elixir version by setting the `exenv_VERSION`
+Sets a shell-specific Elixir version by setting the `EXENV_VERSION`
 environment variable in your shell. This version overrides both
 project-specific versions and the global version.
 
     $ exenv shell 0.7.0
 
 When run without a version number, `exenv shell` reports the current
-value of `exenv_VERSION`. You can also unset the shell version:
+value of `EXENV_VERSION`. You can also unset the shell version:
 
     $ exenv shell --unset
 
 Note that you'll need exenv's shell integration enabled (step 3 of
 the installation instructions) in order to use this command. If you
 prefer not to use shell integration, you may simply set the
-`exenv_VERSION` variable yourself:
+`EXENV_VERSION` variable yourself:
 
-    $ export exenv_VERSION=0.6.0
+    $ export EXENV_VERSION=0.6.0
 
 ### <a name="section_3.4"></a> 3.4 exenv versions
 
