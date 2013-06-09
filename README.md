@@ -239,6 +239,12 @@ run the given command.
     $ exenv which iex
     /Users/sam/.exenv/versions/0.7.0/bin/iex
 
+### <a name="section_3.8"></a> 3.8 exenv install
+
+Using [elixir-build](https://github.com/mururu/elixir-build),
+you can install Elixir automatically. Please see here([elixir-build](https://github.com/mururu/elixir-build))
+for more details.
+
 ## <a name="section_4"></a> 4 Development
 
 The exenv source code is [hosted on
@@ -246,7 +252,7 @@ GitHub](https://github.com/mururu/exenv). It's clean, modular,
 and easy to understand, even if you're not a shell hacker.
 
 Please feel free to submit pull requests and file bugs on the [issue
-tracker](https://github.com/mururu/exmarkdown/issues).
+tracker](https://github.com/mururu/exenv/issues).
 
 ### <a name="section_4.1"></a> 4.1 Version History
 
