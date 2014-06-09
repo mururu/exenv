@@ -84,11 +84,11 @@ easy to fork and contribute any changes back upstream.
         $ exec $SHELL
 
 5. Install Elixir versions into `~/.exenv/versions`. For example, to
-   install Elixir 0.7.0, download and unpack the source, then run:
+   install Elixir 0.13.3, download and unpack the source, then run:
 
-        $ wget https://github.com/downloads/elixir-lang/elixir/v0.7.0.zip
-        $ unzip v0.7.0.zip -d v0.7.0
-        $ mv v0.7.0 ~/.exenv/versions/0.7.0
+        $ wget https://github.com/downloads/elixir-lang/elixir/v0.13.3.zip
+        $ unzip v0.13.3.zip -d v0.13.3
+        $ mv v0.13.3 ~/.exenv/versions/0.13.3
 
 6. Rebuild the shim binaries. You should do this any time you install
    a new Elixir binary (for example, when installing a new Elixir version,
