@@ -86,7 +86,7 @@ easy to fork and contribute any changes back upstream.
 5. Install Elixir versions into `~/.exenv/versions`. For example, to
    install Elixir 0.13.3, download and unpack the source, then run:
 
-        $ wget https://github.com/downloads/elixir-lang/elixir/v0.13.3.zip
+        $ wget https://github.com/elixir-lang/elixir/archive/v0.13.3.zip
         $ unzip v0.13.3.zip -d v0.13.3
         $ mv v0.13.3 ~/.exenv/versions/0.13.3
 
