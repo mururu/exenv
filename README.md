@@ -87,8 +87,8 @@ easy to fork and contribute any changes back upstream.
    install Elixir 0.13.3, download and unpack the source, then run:
 
         $ wget https://github.com/elixir-lang/elixir/archive/v0.13.3.zip
-        $ unzip v0.13.3.zip -d v0.13.3
-        $ mv v0.13.3 ~/.exenv/versions/0.13.3
+        $ unzip v0.13.3.zip
+        $ mv elixir-0.13.3/ ~/.exenv/versions/0.13.3
 
 6. Rebuild the shim binaries. You should do this any time you install
    a new Elixir binary (for example, when installing a new Elixir version,
