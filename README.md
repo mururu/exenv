@@ -62,7 +62,7 @@ easy to fork and contribute any changes back upstream.
 
 1. Check out exenv into `~/.exenv`.
 
-        $ cd
+        $ cd ~
         $ git clone git://github.com/mururu/exenv.git .exenv
 
 2. Add `~/.exenv/bin` to your `$PATH` for access to the `exenv`
