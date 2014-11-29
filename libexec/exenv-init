@@ -17,7 +17,7 @@ do
   fi
 done
 
-shell="$1"
+
 if [ -z "$shell" ]; then
   shell="$(basename "$SHELL")"
 fi
@@ -53,6 +53,9 @@ if [ -z "$print" ]; then
   ksh )
     profile='~/.profile'
     ;;
+  fish )
+    profile='~/.config/fish/config.fish'
+    ;;
   * )
     profile='your profile'
     ;;
@@ -61,7 +64,14 @@ if [ -z "$print" ]; then
   { echo "# Load exenv automatically by adding"
     echo "# the following to ${profile}:"
     echo
-    echo 'eval "$(exenv init -)"'
+    case "$shell" in
+    fish )
+      echo 'status --is-interactive; and . (exenv init -|psub)'
+      ;;
+    * )
+      echo 'eval "$(exenv init -)"'
+      ;;
+    esac
     echo
   } >&2
 
@@ -70,10 +80,13 @@ fi
 
 mkdir -p "${EXENV_ROOT}/"{shims,versions}
 
-echo 'export PATH="'${EXENV_ROOT}'/shims:${PATH}"'
-
 case "$shell" in
+fish )
+  echo "setenv PATH '${EXENV_ROOT}/shims' \$PATH"
+  echo ". \"$root/completions/exenv.${shell}\""
+  ;;
 bash | zsh )
+  echo 'export PATH="'${EXENV_ROOT}'/shims:${PATH}"'
   echo "source \"$root/completions/exenv.${shell}\""
   ;;
 esac
@@ -83,6 +96,27 @@ if [ -z "$no_rehash" ]; then
 fi
 
 commands=(`exenv commands --sh`)
+case "$shell" in
+fish )
+  cat <<EOS
+function exenv
+  set command \$argv[1]
+  set -e argv[1]
+
+  switch "\$command"
+  case ${commands[*]}
+    eval (exenv "sh-\$command" \$argv)
+  case '*'
+    command exenv "\$command" \$argv
+  end
+end
+EOS
+  ;;
+* )
+  ;;
+esac
+
+if [ "$shell" != "fish" ]; then
 IFS="|"
 cat <<EOS
 exenv() {
@@ -99,3 +133,4 @@ exenv() {
   esac
 }
 EOS
+fi
