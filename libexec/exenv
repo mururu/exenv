@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 set -e
+
+if [ "$1" = "--debug" ]; then
+  export EXENV_DEBUG=1
+  shift
+fi
+
 [ -n "$EXENV_DEBUG" ] && set -x
 
 resolve_link() {
