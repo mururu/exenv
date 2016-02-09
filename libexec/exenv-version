@@ -2,4 +2,4 @@
 set -e
 [ -n "$EXENV_DEBUG" ] && set -x
 
-echo "$(exenv-version-name) (set by $(exenv-version-origin))"
+echo "$(exenv-version-name) $(exenv-version-origin-message)"
