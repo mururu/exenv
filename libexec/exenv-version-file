@@ -4,7 +4,11 @@ set -e
 
 root="$EXENV_DIR"
 while [ -n "$root" ]; do
-  if [ -e "${root}/.exenv-version" ]; then
+  if [ -e "${root}/.elixir-version" ]; then
+    echo "${root}/.elixir-version"
+    exit
+  elif [ -e "${root}/.exenv-version" ]; then
+    echo "exenv: Use of the .exenv-version file is deprecated. Rename to .elixir-version"
     echo "${root}/.exenv-version"
     exit
   fi
