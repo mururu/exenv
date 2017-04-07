@@ -89,6 +89,8 @@ easy to fork and contribute any changes back upstream.
         $ wget https://github.com/elixir-lang/elixir/archive/v0.13.3.zip
         $ unzip v0.13.3.zip
         $ mv elixir-0.13.3/ ~/.exenv/versions/0.13.3
+        $ cd ~/.exenv/versions/0.13.3
+        $ make
 
 6. Rebuild the shim binaries. You should do this any time you install
    a new Elixir binary (for example, when installing a new Elixir version,
