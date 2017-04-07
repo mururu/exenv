@@ -51,9 +51,9 @@ local) echo "usage: exenv local <version>
        exenv local --unset
 
 Sets the local directory-specific Elixir version by writing the version
-name to a file named '.exenv-version'.
+name to a file named '.elixir-version'.
 
-When you run a Elixir command, exenv will look for an '.exenv-version'
+When you run a Elixir command, exenv will look for an '.elixir-version'
 file in the current directory and each parent directory. If no such
 file is found in the tree, exenv will use the global Elixir version
 specified with \`exenv global', or the version specified in the

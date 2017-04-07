@@ -10,14 +10,19 @@ if [ "$1" = "--complete" ]; then
 fi
 
 EXENV_VERSION="$1"
-EXENV_VERSION_FILE=".exenv-version"
+EXENV_VERSION_FILE=".elixir-version"
+OLD_EXENV_VERSION_FILE=".exenv-version"
 
 if [ "$EXENV_VERSION" = "--unset" ]; then
   rm -f "$EXENV_VERSION_FILE"
 elif [ -n "$EXENV_VERSION" ]; then
   exenv-version-file-write "$EXENV_VERSION_FILE" "$EXENV_VERSION"
+elif [ -e "$EXENV_VERSION_FILE" ]; then
+  exenv-version-file-read "$EXENV_VERSION_FILE"
+elif [ -e "$OLD_EXENV_VERSION_FILE" ]; then
+  echo "exenv: Use of the .exenv-version file is deprecated. Rename to .elixir-version"
+  exenv-version-file-read "$OLD_EXENV_VERSION_FILE"
 else
-  exenv-version-file-read "$EXENV_VERSION_FILE" ||
   { echo "exenv: no local version configured for this directory"
     exit 1
   } >&2
