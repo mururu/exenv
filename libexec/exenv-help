@@ -31,7 +31,7 @@ Some useful exenv commands are:
    which         Show the full path for the given Elixir command
 
 See 'exenv help <command>' for information on a specific command.
-For full documentation, see: https://github.com/sstephenson/exenv#readme"
+For full documentation, see: https://github.com/jtzero/exenv#readme"
 ;;
 commands) echo "usage: exenv commands
        exenv commands --sh
