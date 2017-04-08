@@ -63,7 +63,7 @@ easy to fork and contribute any changes back upstream.
 1. Check out exenv into `~/.exenv`.
 
         $ cd
-        $ git clone git://github.com/mururu/exenv.git .exenv
+        $ git clone git://github.com/jtzero/exenv.git .exenv
 
 2. Add `~/.exenv/bin` to your `$PATH` for access to the `exenv`
    command-line utility.
@@ -247,14 +247,21 @@ Using [elixir-build](https://github.com/mururu/elixir-build),
 you can install Elixir automatically. Please see here([elixir-build](https://github.com/mururu/elixir-build))
 for more details.
 
+### <a name="section_3.9"></a> 3.9 exenv install-erlang
+
+Elixir needs erlang to run.
+Using [erlang-build](https://github.com/jtzero/erlang-build),
+you can install Erlang automatically. Please see here([elixir-build](https://github.com/jtzero/erlang-build))
+for more details.
+
 ## <a name="section_4"></a> 4 Development
 
 The exenv source code is [hosted on
-GitHub](https://github.com/mururu/exenv). It's clean, modular,
+GitHub](https://github.com/jtzero/exenv). It's clean, modular,
 and easy to understand, even if you're not a shell hacker.
 
 Please feel free to submit pull requests and file bugs on the [issue
-tracker](https://github.com/mururu/exenv/issues).
+tracker](https://github.com/jtzero/exenv/issues).
 
 ### <a name="section_4.1"></a> 4.1 Version History
 
