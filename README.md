@@ -260,6 +260,7 @@ tracker](https://github.com/jtzero/exenv/issues).
 ### <a name="section_4.1"></a> 4.1 Version History
 
 **0.1.0** (November 10, 2012)
+**0.2.0** (April 9, 2017)
 
 Fork [rbenv](https://github.com/sstephenson/rbenv)
 
