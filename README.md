@@ -29,6 +29,7 @@ Thanks to @sstephenson and @repeatedly.
       * [3.5 exenv version](#section_3.5)
       * [3.6 exenv rehash](#section_3.6)
       * [3.7 exenv which](#section_3.7)
+      * [3.8 exenv install](#section_3.8)
    * [4 Development](#section_4)
       * [4.1 Version History](#section_4.1)
       * [4.2 License](#section_4.2)
@@ -245,13 +246,6 @@ run the given command.
 
 Using [elixir-build](https://github.com/mururu/elixir-build),
 you can install Elixir automatically. Please see here([elixir-build](https://github.com/mururu/elixir-build))
-for more details.
-
-### <a name="section_3.9"></a> 3.9 exenv install-erlang
-
-Elixir needs erlang to run.
-Using [erlang-build](https://github.com/jtzero/erlang-build),
-you can install Erlang automatically. Please see here([elixir-build](https://github.com/jtzero/erlang-build))
 for more details.
 
 ## <a name="section_4"></a> 4 Development
