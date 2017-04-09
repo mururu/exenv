@@ -267,8 +267,6 @@ Fork [rbenv](https://github.com/sstephenson/rbenv)
 
 (The MIT license)
 
-Copyright (c) 2011 Sam Stephenson, Yuki Ito
-
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
 "Software"), to deal in the Software without restriction, including
