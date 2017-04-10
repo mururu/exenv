@@ -91,6 +91,13 @@ bash | zsh )
   ;;
 esac
 
+OLDIFS="$IFS"
+IFS=$'\n' scripts=(`exenv-hooks init`)
+IFS="$OLDIFS"
+for script in "${scripts[@]}"; do
+  echo "source \"$script\""
+done
+
 if [ -z "$no_rehash" ]; then
   echo 'exenv rehash 2>/dev/null'
 fi
