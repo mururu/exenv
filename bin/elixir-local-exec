@@ -5,7 +5,7 @@
 #
 #    #!/usr/bin/env elixir-local-exec
 #
-# Use it for scripts inside a project with an `.exenv-version`
+# Use it for scripts inside a project with an `.elixir-version`
 # file. When you run the scripts, they'll use the project-specified
 # Elixir version, regardless of what directory they're run from. Useful
 # for e.g. running project tasks in cron scripts without needing to

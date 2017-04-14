@@ -1,3 +1,5 @@
+no longer maintained use https://github.com/asdf-vm/asdf-elixir
+
 # Simple Elixir Version Management: exenv
 
 exenv lets you easily switch between multiple versions of Elixir. It's
@@ -29,6 +31,7 @@ Thanks to @sstephenson and @repeatedly.
       * [3.5 exenv version](#section_3.5)
       * [3.6 exenv rehash](#section_3.6)
       * [3.7 exenv which](#section_3.7)
+      * [3.8 exenv install](#section_3.8)
    * [4 Development](#section_4)
       * [4.1 Version History](#section_4.1)
       * [4.2 License](#section_4.2)
@@ -63,7 +66,7 @@ easy to fork and contribute any changes back upstream.
 1. Check out exenv into `~/.exenv`.
 
         $ cd
-        $ git clone git://github.com/mururu/exenv.git .exenv
+        $ git clone git://github.com/jtzero/exenv.git .exenv
 
 2. Add `~/.exenv/bin` to your `$PATH` for access to the `exenv`
    command-line utility.
@@ -89,6 +92,8 @@ easy to fork and contribute any changes back upstream.
         $ wget https://github.com/elixir-lang/elixir/archive/v0.13.3.zip
         $ unzip v0.13.3.zip
         $ mv elixir-0.13.3/ ~/.exenv/versions/0.13.3
+        $ cd ~/.exenv/versions/0.13.3
+        $ make
 
 6. Rebuild the shim binaries. You should do this any time you install
    a new Elixir binary (for example, when installing a new Elixir version,
@@ -159,7 +164,7 @@ first argument. The most common subcommands are:
 
 Sets the global version of Elixir to be used in all shells by writing
 the version name to the `~/.exenv/version` file. This version can be
-overridden by a per-project `.exenv-version` file, or by setting the
+overridden by a per-project `.elixir-version` file, or by setting the
 `EXENV_VERSION` environment variable.
 
     $ exenv global 0.7.0
@@ -173,7 +178,7 @@ currently configured global version.
 ### <a name="section_3.2"></a> 3.2 exenv local
 
 Sets a local per-project Elixir version by writing the version name to
-an `.exenv-version` file in the current directory. This version
+an `.elixir-version` file in the current directory. This version
 overrides the global, and can be overridden itself by setting the
 `EXENV_VERSION` environment variable or with the `exenv shell`
 command.
@@ -221,7 +226,7 @@ Displays the currently active Elixir version, along with information on
 how it was set.
 
     $ exenv version
-    0.7.0 (set by /Volumes/37signals/basecamp/.exenv-version)
+    0.7.0 (set by /Volumes/37signals/basecamp/.elixir-version)
 
 ### <a name="section_3.6"></a> 3.6 exenv rehash
 
@@ -248,39 +253,19 @@ for more details.
 ## <a name="section_4"></a> 4 Development
 
 The exenv source code is [hosted on
-GitHub](https://github.com/mururu/exenv). It's clean, modular,
+GitHub](https://github.com/jtzero/exenv). It's clean, modular,
 and easy to understand, even if you're not a shell hacker.
 
 Please feel free to submit pull requests and file bugs on the [issue
-tracker](https://github.com/mururu/exenv/issues).
+tracker](https://github.com/jtzero/exenv/issues).
 
 ### <a name="section_4.1"></a> 4.1 Version History
 
 **0.1.0** (November 10, 2012)
+**0.2.0** (April 9, 2017)
 
 Fork [rbenv](https://github.com/sstephenson/rbenv)
 
 ### <a name="section_4.2"></a> 4.2 License
 
-(The MIT license)
-
-Copyright (c) 2011 Sam Stephenson, Yuki Ito
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Check [LICENSE](LICENSE) for more information.

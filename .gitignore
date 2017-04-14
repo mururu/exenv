@@ -1,4 +1,5 @@
-/plugins
+/plugins/*
+!/plugins/.keep
 /shims
 /version
 /versions
