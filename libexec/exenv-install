@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -e
+[ -n "$EXENV_DEBUG" ] && set -x
+
+VERSION="$1"
+
+if [ -d "${EXENV_ROOT}/versions/${VERSION}" ]; then
+  echo "Elixir ${VERSION} is already installed"
+else
+  echo "Installing Elixir ${VERSION}..."
+  cd "${EXENV_ROOT}/versions/"
+  wget https://github.com/elixir-lang/elixir/archive/v${VERSION}.zip -O "${VERSION}.zip"
+  unzip "${VERSION}.zip"
+  mv "elixir-${VERSION}" "${VERSION}"
+  rm "${VERSION}.zip"
+  cd "${VERSION}"
+  make clean test
+  exenv rehash
+fi
