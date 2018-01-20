@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -e
+[ -n "$EXENV_DEBUG" ] && set -x
+
+if [ -n "$1" ]; then
+  VERSION="$1"
+else
+  echo "Please specify a version to uninstall. e.g. 'exenv uninstall 1.4.0'"
+  exit
+fi
+
+if [ -d "${EXENV_ROOT}/versions/${VERSION}" ]; then
+  echo "Are you sure you want to uninstall Elixir ${VERSION}? [Yn]:"
+  read sure
+  case "${sure}" in
+    "Y"|"y"|"")
+      rm -rf "${EXENV_ROOT}/versions/${VERSION}"
+      exenv rehash
+      echo "Uninstalled Elixir ${VERSION}"
+      ;;
+    *)
+      # Not uninstalling
+      ;;
+  esac
+else
+  echo "Elixir ${VERSION} is not installed"
+fi
