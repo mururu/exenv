@@ -2,7 +2,12 @@
 set -e
 [ -n "$EXENV_DEBUG" ] && set -x
 
-VERSION="$1"
+if [ -n "$1" ]; then
+  VERSION="$1"
+else
+  echo "Please specify a version to install. e.g. 'exenv uninstall 1.4.0'"
+  exit
+fi
 
 if [ -d "${EXENV_ROOT}/versions/${VERSION}" ]; then
   echo "Elixir ${VERSION} is already installed"
