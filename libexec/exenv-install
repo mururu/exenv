@@ -5,7 +5,7 @@ set -e
 if [ -n "$1" ]; then
   VERSION="$1"
 else
-  echo "Please specify a version to install. e.g. 'exenv uninstall 1.4.0'"
+  echo "Please specify a version to install. e.g. 'exenv install 1.4.0'"
   exit
 fi
 
