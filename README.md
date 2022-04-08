@@ -1,3 +1,7 @@
+**This repository is archived**
+
+---
+
 # Simple Elixir Version Management: exenv
 
 exenv lets you easily switch between multiple versions of Elixir. It's
